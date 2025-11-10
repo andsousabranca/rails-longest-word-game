@@ -1,0 +1,23 @@
+<div class="container">
+  <h1 class="text-center">New game</h1>
+
+  <div class="d-flex justify-content-center flex-wrap gap-2">
+    <% @letters.each do |letter| %>
+      <div class="border rounded p-3 text-center bg-light fs-3 fw-bold">
+        <%= letter %>
+      </div>
+    <% end %>
+  </div>
+
+  <br>
+
+  <form action="/score" method="POST" data-turbo="false" class="d-flex">
+    <label for="answer"></label>
+    <input type="text" id="answer" name="answer" placeholder="Your answer..." class="form-control">
+    <input type="submit" value="Submit word" class="btn btn-primary">
+    <input id="letter_array" name="letter_array" type="hidden" value=<%= @letters.join %>>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  </form>
+</div>
+
+<%= link_to "score", score_path %>
